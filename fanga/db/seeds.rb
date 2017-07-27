@@ -16,9 +16,9 @@ Lang.create!([
 	])
 User.create!([
 		{
-			name: "toto",
-			email: "toto@gmail.com",
-			password_digest: "000k00"
+			name: "thomas",
+			email: "tiger63.thomas@gmail.com",
+			password: "011284"
 		} 
 	])
 Article.create!([

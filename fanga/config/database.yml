@@ -14,7 +14,7 @@ development:
   database: fanga_development
   adapter: postgresql
   encoding: unicode
-  host: 192.168.99.100
+  host: db
   pool: 5
   username: postgres  
   password: mysecretpassword

@@ -5,8 +5,8 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-gem 'rails', github: "rails/rails"
 
+gem 'rails', '~> 5.1'
 gem 'pg'
 
 gem 'rack-cors'
@@ -18,7 +18,7 @@ gem 'puma', '~> 3.7'
 
 gem 'simple_command'
  gem 'jwt'
-
+ gem 'i18n'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.5'
