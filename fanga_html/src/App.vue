@@ -9,9 +9,9 @@
                 <ul class="nav navbar-nav">
                     <li><router-link to="/home">Home</router-link></li>
                     <li><router-link to="/time-entry">Time Entries</router-link></li>
+                    <li><router-link to="/login">login</router-link></li>
                 </ul>
             </div>
-            <login_div></login_div>
         </nav>
         <div class="container">
             <div class="col-sm-3">
@@ -26,12 +26,10 @@
 
 <script>
     import Sidebar from './components/Sidebar.vue'
-    import Logindiv from './components/LoginDiv.vue'
     import store from './store';
     export default {
         components: {
-            'sidebar': Sidebar ,
-            'login_div': Logindiv
+            'sidebar': Sidebar
         },
         computed: {
             totalTime(){

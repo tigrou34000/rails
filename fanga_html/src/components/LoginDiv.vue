@@ -11,33 +11,27 @@
 </template>
 <script>
     import axios from 'axios';
+    import store from '../store';
     export default {
     name:'login',
       data () {
         return {
-                    token: '',
-                    email: '',
-                    password: '',
+                    token: store.state.token,
+                    email: 'tiger63.thomas@gmail.com',
+                    password: '011284',
                     name: '',
                     surname: '',
-                    isLogin: false
+                    isLogin: store.state.isLogin
             }
         },
         methods: {
-            setCookie(name, value, exdays) {
-                var d = new Date();
-                d.setTime(d.getTime() +  (exdays*24*60*60*1000) ) ;
-                var expires = "expires="+ d.toUTCString();
-                document.cookie = '"'+name+'='+value+';'+expires;
-            },
+
             authentication() {
                 axios.post("http://localhost:3000/authenticate", {
                     'email': this.email,
                     'password': this.password
                 }).then(function(response) {
-                    Login.token = response.data.auth_token;
-                    isLogin = true;
-                    this.setCookie("auth_token", token , 1);
+                    store.commit('login', {'email': email, 'token': response.data.auth_token});
                     
                 }).catch(function (error) {
                     console.log(error);

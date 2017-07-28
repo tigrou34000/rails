@@ -3,6 +3,7 @@ import App from './App'
 import Home from './components/Home.vue'
 import TimeEntry from './components/TimeEntry.vue'
 import LogTime from './components/LogTime.vue'
+import Login from './components/LoginDiv.vue'
 
 import VueRouter from 'vue-router'
 import VueResource from 'vue-resource'
@@ -13,6 +14,7 @@ Vue.use(VueRouter)
 
 const routes = [
     { path: '/home', component: Home },
+    { path: '/login', component: Login },
     { path: '/time-entry', component: TimeEntry,
         children: [
             {
