@@ -33,7 +33,7 @@
                     'email': this.email,
                     'password': this.password
                 }).then(function(response) {
-                    store.commit('login', {'email': email, 'token': response.data.auth_token});
+                    store.commit('login', {'email': email, 'token': response.data.auth_token, 'user_id': response.data.user_id});
                 }).catch(function (error) {
                     console.log(error);
                 });

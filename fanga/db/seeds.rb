@@ -18,7 +18,8 @@ User.create!([
 		{
 			name: "thomas",
 			email: "tiger63.thomas@gmail.com",
-			password: "011284"
+			password: "011284",
+			activate_account: "true"
 		} 
 	])
 Article.create!([

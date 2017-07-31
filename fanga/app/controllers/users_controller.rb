@@ -3,8 +3,7 @@ class UsersController < ApplicationController
 
 	def show
 		
-			jsonWeb
-			user = User.where(activate_account: true, id: @current_user.id)
+			user = User.where( id: @current_user.id)
 			if user.any?
 				render json: {user: user}
 			else
@@ -13,11 +12,16 @@ class UsersController < ApplicationController
 	end
 	def update
 		user = User.find(params[:id])
-		if user.any?
+
+
+		if !user.nil?
+			puts("user exist")
+
 			if params.has_key?(:activate_account)
 				user.activate_account =  params[:activate_account]
 			end
 			if params.has_key?(:name)
+				puts("name should be save")
 				user.name =  params[:name]
 			end
 			if params.has_key?(:nickname)
@@ -27,12 +31,12 @@ class UsersController < ApplicationController
 					user.surname =  params[:surname]
 			end
 			if params.has_key?(:password) && params.has_key?(:password_confirmation)
-					user.password =  params[:password]
+				user.password =  params[:password]
 			end
-			begin 
-					user.save
-					render json: {message: "ok"}, status: :ok
-			rescue
+			if user.valid?
+				user.save
+				render json: {message: "ok"}, status: :ok
+			else
 				render json: {error: user.errors}, status: :bad_request
 			end
 		else
