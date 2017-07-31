@@ -1,9 +1,11 @@
 import Vue from 'vue'
 import App from './App'
+
+
 import Home from './components/Home.vue'
-import TimeEntry from './components/TimeEntry.vue'
-import LogTime from './components/LogTime.vue'
+
 import Login from './components/LoginDiv.vue'
+import Subscription from './components/Subscription.vue'
 
 import VueRouter from 'vue-router'
 import VueResource from 'vue-resource'
@@ -14,14 +16,9 @@ Vue.use(VueRouter)
 
 const routes = [
     { path: '/home', component: Home },
-    { path: '/login', component: Login },
-    { path: '/time-entry', component: TimeEntry,
-        children: [
-            {
-                path: 'log-time', component: LogTime
-            }
-        ]
-    },
+    {  path: '/user', component:Login, name: 'user.index'},
+    {  path: '/user/create-user', component:Subscription, name: 'user.create'},
+    {  path: '/user/edit-user', component:Subscription, name: 'user.update'},
     { path: '*', redirect: '/home' },
 ];
 

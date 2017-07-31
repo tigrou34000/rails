@@ -8,8 +8,7 @@
                 </a>
                 <ul class="nav navbar-nav">
                     <li><router-link to="/home">Home</router-link></li>
-                    <li><router-link to="/time-entry">Time Entries</router-link></li>
-                    <li><router-link to="/login">login</router-link></li>
+                    <li><router-link to="/user">login</router-link></li>
                 </ul>
             </div>
         </nav>

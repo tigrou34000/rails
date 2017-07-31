@@ -3,10 +3,13 @@
         <label>Email : </label><input id="email" type="text" v-model="email">
         <label>password : </label><input id="password" type="text" v-model="password" >
         <button v-on:click="authentication()">Login</button>
+        <router-link :to="{name:'user.create'}" class="nav-link">create account</router-link>
+        <router-link to="/user/create-user">created account</router-link>
     </div>
     <div v-else>
         Logué
-        <button v-on:click="disconnect()">Deconnection</button>
+        <button v-on:click="disconnect()">Disconnect</button>
+        <router-link to="/user/edit-user">edit account</router-link>
     </div>
 
 </template>
@@ -17,16 +20,13 @@
     name:'login',
       data () {
         return {
-                    token: store.state.token,
                     email: 'tiger63.thomas@gmail.com',
                     password: '011284',
-                    name: '',
-                    surname: ''
             }
         },
         methods: {
             isLogin() {
-                return store.state.isLogin;
+                return store.state.user.isLogin;
             },
             authentication() {
                 axios.post("http://localhost:3000/authenticate", {

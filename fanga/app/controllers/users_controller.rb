@@ -3,7 +3,8 @@ class UsersController < ApplicationController
 
 	def show
 		
-			user = User.where(activate_account: true, id: params[:id])
+			jsonWeb
+			user = User.where(activate_account: true, id: @current_user.id)
 			if user.any?
 				render json: {user: user}
 			else
