@@ -27,7 +27,7 @@ var store = new Vuex.Store({
             state.isLogin = true;
           //  state.setCookie('auth_token', aLogin.token, 1);
         },
-        logout(state, aLogin) {
+        logout(state) {
             state.email = '';
             state.token ='';
             state.isLogin = false;
