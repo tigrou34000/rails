@@ -13,26 +13,22 @@
             </div>
         </nav>
         <div class="container">
-            <div class="col-sm-3">
-                <sidebar :time="totalTime"></sidebar>
-            </div>
-            <div class="col-sm-9">
+                <error_handling :errors="getErrors"></error_handling>
                 <router-view></router-view>
-            </div>
         </div>
     </div>
 </template>
 
 <script>
-    import Sidebar from './components/Sidebar.vue'
+    import Error from './components/Error.vue'
     import store from './store';
     export default {
         components: {
-            'sidebar': Sidebar
+            'error_handling': Error
         },
         computed: {
-            totalTime(){
-                return store.state.totalTime;
+            getErrors(){
+                return store.state.errors;
             }
         }
     }

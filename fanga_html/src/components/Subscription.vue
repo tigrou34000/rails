@@ -51,7 +51,7 @@
                     }).then(function(response) {
                         console.log(response);
                     }).catch(function (error) {
-                        console.log(error);
+                        store.commit('setErrors', error.response.data.error);
                     });
                 }else{
 

@@ -35,7 +35,12 @@
                 }).then(function(response) {
                     store.commit('login', {'email': email, 'token': response.data.auth_token, 'user_id': response.data.user_id});
                 }).catch(function (error) {
-                    console.log(error);
+                    store.commit('setErrors',error.response.data.error)
+                    var a = new Object;
+                    for(var err in error.response.data.error) {
+                        var b = {err : error.response.data.error[err][0] }
+                        store.commit('setErrors', );
+                    }
                 });
                 ;
             },

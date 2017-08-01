@@ -15,7 +15,8 @@ var store = new Vuex.Store({
             dob: '',
             isLogin: false,
             token: ''
-        }
+        },
+        errors:{}
     },
     mutations: {
         login(state, aLogin) {
@@ -33,6 +34,17 @@ var store = new Vuex.Store({
         },
         updateUser(state, user) {
             state.user = user;
+        },
+        setErrors(state, error) {
+            var a = new Object;
+            for(var err in error) {
+                console.log(err);
+                var b = {err : error[err][0]}
+               a =  Object.assign(a,b);
+            }
+            console.log(a);
+            console.log("===");
+            state.errors = a;
         }
     }
 })
