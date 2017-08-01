@@ -42,12 +42,11 @@
                 if(this.isLogin()) {
                     var aFinal = {};
                     for (var key in this.eventObj) {
-                        if(this.eventObj[key] != "")  {
+                        if(this.eventObj[key] != "" &&  this.eventObj[key]!== null)  {
                             aFinal[key] = this.eventObj[key];
                         }
                     }
-
-                    axios.put("http://localhost:3000/users/"+store.state.user.id, this.eventObj, {
+                    axios.put("http://localhost:3000/users/"+store.state.user.id, aFinal, {
                         headers: { Authorization: store.state.user.token}
                     }).then(function(response) {
                         console.log(response);
@@ -68,14 +67,13 @@
                 axios.get("http://localhost:3000/users/"+store.state.user.id, {
                     headers: { Authorization: store.state.user.token}
                 }).then(function(response) {
-                    let userData = store.state.user
-                    for (var key in  userData) {
-                        if (response.data.user[0][key] && listAvailable.indexOf(key)>=0) {
-                            userData[key] = response.data.user[0][key];
+                    for (var key in  response.data.user[0]) {
+                        if (response.data.user[0][key] !="" && listAvailable.indexOf(key)>=0) {
+                            self.$data.eventObj[key] = response.data.user[0][key];
                         }
                     }
-                    self.$data.eventObj = userData;
-                    store.commit('updateUser', userData);
+
+                    store.commit('updateUser', store.state.user.merge(self.$data.eventObj) );
                 }).catch(function (error) {
                     console.log(error);
                 });
