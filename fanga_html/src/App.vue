@@ -13,7 +13,7 @@
             </div>
         </nav>
         <div class="container">
-                <error_handling :errors="getErrors"></error_handling>
+                <error_handling></error_handling>
                 <router-view></router-view>
         </div>
     </div>
@@ -21,15 +21,11 @@
 
 <script>
     import Error from './components/Error.vue'
-    import store from './store';
     export default {
         components: {
             'error_handling': Error
-        },
-        computed: {
-            getErrors(){
-                return store.state.errors;
-            }
         }
+
+
     }
 </script>

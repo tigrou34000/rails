@@ -1,9 +1,15 @@
 import Vuex from 'vuex'
 import Vue from 'vue'
 
-Vue.use(Vuex)
+import * as getters from './store/getters'
 
-var store = new Vuex.Store({
+Vue.use(Vuex)
+const debug = process.env.NODE_ENV !== 'production'
+
+
+export default new Vuex.Store({
+    getters,
+    strict: debug,
     state: {
         user: {
             id: 0,
@@ -36,17 +42,9 @@ var store = new Vuex.Store({
             state.user = user;
         },
         setErrors(state, error) {
-            var a = new Object;
             for(var err in error) {
-                console.log(err);
-                var b = {err : error[err][0]}
-               a =  Object.assign(a,b);
+               state.errors[err] = error[err]
             }
-            console.log(a);
-            console.log("===");
-            state.errors = a;
         }
     }
 })
-
-export default store

@@ -10,6 +10,7 @@ import Subscription from './components/Subscription.vue'
 import VueRouter from 'vue-router'
 import VueResource from 'vue-resource'
 
+import store from './store'
 
 Vue.use(VueResource)
 Vue.use(VueRouter)
@@ -32,6 +33,7 @@ var bus = new Vue({});
 /* eslint-disable no-new */
 const app = new Vue({
         router,
+        store,
         data: {
             bus:bus
         },
