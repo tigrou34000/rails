@@ -1,8 +1,7 @@
 <template>
     <div>
         <ul>
-            {{errors_handling}}
-            <!--<li v-for="error in errors_handling">{{ error }}</li>-->
+            <li v-for="(error, message) in errors_handling"> {{message}} : {{ error }}</li>
         </ul>
     </div>
 </template>
@@ -10,7 +9,7 @@
     import { mapGetters } from 'vuex'
     export default {
         computed: mapGetters({
-                    errors_handling: 'GetErrors',
+                    errors_handling: 'getErrors',
                 })
     }
 

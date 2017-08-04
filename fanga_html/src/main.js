@@ -10,7 +10,7 @@ import Subscription from './components/Subscription.vue'
 import VueRouter from 'vue-router'
 import VueResource from 'vue-resource'
 
-import store from './store'
+import store from './store/index'
 
 Vue.use(VueResource)
 Vue.use(VueRouter)

@@ -13,7 +13,7 @@
             </div>
         </nav>
         <div class="container">
-                <error_handling></error_handling>
+                <Error></Error>
                 <router-view></router-view>
         </div>
     </div>
@@ -22,10 +22,6 @@
 <script>
     import Error from './components/Error.vue'
     export default {
-        components: {
-            'error_handling': Error
-        }
-
-
+        components: {Error}
     }
 </script>

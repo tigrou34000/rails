@@ -1,5 +1,5 @@
 <template>
-    <div v-if="!isLogin()">
+    <div v-if="!isLogin">
         <label>Email : </label><input id="email" type="text" v-model="email">
         <label>password : </label><input id="password" type="text" v-model="password" >
         <button v-on:click="authentication()">Login</button>
@@ -13,9 +13,11 @@
     </div>
 
 </template>
+
 <script>
     import axios from 'axios';
-    import store from '../store';
+    import { mapGetters, mapActions } from 'vuex'
+    import store from '../store/index'
     export default {
     name:'login',
       data () {
@@ -24,27 +26,30 @@
                     password: '011284',
             }
         },
+        computed: mapGetters({
+                setErrors: 'setErrors',
+                setUser: 'setUser',
+                logout:'logout',
+                isLogin : "isLogin"
+        }),
         methods: {
-            isLogin() {
-                return store.state.user.isLogin;
-            },
             authentication() {
                 axios.post("http://localhost:3000/authenticate", {
                     'email': this.email,
                     'password': this.password
                 }).then(function(response) {
-                    store.commit('login', {'email': email, 'token': response.data.auth_token, 'user_id': response.data.user_id});
+                    store.dispatch('setUser', {'email': email.value, 'token': response.data.auth_token, 'user_id': response.data.user_id});
                 }).catch(function (error) {
                     for(var err in error.response.data.error) {
                          var a = {}
                          a[err] = error.response.data.error[err][0]
-                        this.$store.dispatch('setErrors', a);
+                        store.dispatch('setErrors', a);
                     }
                 });
                 ;
             },
             disconnect() {
-                store.commit('logout');
+                store.dispatch('logout');
             }
         }
     }
