@@ -9,6 +9,7 @@
                 <ul class="nav navbar-nav">
                     <li><router-link to="/home">Home</router-link></li>
                     <li><router-link to="/user">login</router-link></li>
+                    <li><router-link to="/myplan">my plan</router-link></li>
                 </ul>
             </div>
         </nav>

@@ -50,7 +50,7 @@ class Town < ActiveRecord::Base
 	end
 	def self.auto_complete(q)
 		return nil if q.blank?
-		Town.__elasticsearch__.client.search  \
+		return Town.__elasticsearch__.client.search  \
 		index: Town.index_name,
 		body: { query: { match: { town_suggest: q.to_s} } }
 	end

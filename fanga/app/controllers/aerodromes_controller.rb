@@ -3,8 +3,9 @@ class AerodromesController < ApplicationController
 
 	def index
 		#render json: Town.auto_complete(params[:q])
-		render json: Aerodrome.around_town(params[:lat], params[:lon],params[:ray])
-
+		require 'hashie'
+		aerodrome = Hashie::Mash.new Aerodrome.around_town(params[:lat], params[:lon],params[:ray])
+		render json: aerodrome.hits.hits.map {|k| k._source }
 
 	end
 

@@ -24,8 +24,8 @@ Lang.create!([
 User.create!([
 		{
 			name: "thomas",
-			email: "tiger63.thomas@gmail.com",
-			password: "011284",
+			email: "plop@gmail.com",
+			password: "111111",
 			activate_account: "true"
 		} 
 	])

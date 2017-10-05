@@ -2,7 +2,10 @@ class TownsController < ApplicationController
 	skip_before_action :authenticate_request
 
 	def index
-		render json: Town.auto_complete(params[:q])
+		require 'hashie'
+		towns = Hashie::Mash.new Town.auto_complete(params[:q])
+
+		render json: towns.hits.hits.map {|k| k._source }
 	end
 
 	def show
