@@ -52,15 +52,10 @@ class UsersController < ApplicationController
 		else
 			render json: {error: user.errors}, status: :bad_request
 		end
-
 	end
 	def destroy
 		user = User.find(params[:id])
 		user.activate_account = false
 		user.save
 	end
-
-
-
-
 end

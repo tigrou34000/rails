@@ -17,8 +17,15 @@ gem 'puma', '~> 3.7'
  gem 'bcrypt', '~> 3.1.11'
 
 gem 'simple_command'
- gem 'jwt'
- gem 'i18n'
+gem 'jwt'
+gem 'i18n'
+
+gem 'elasticsearch-rails', git: 'git://github.com/elasticsearch/elasticsearch-rails.git'
+gem 'elasticsearch-model', git: 'git://github.com/elasticsearch/elasticsearch-rails.git'
+
+gem 'nokogiri'
+
+
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.5'
