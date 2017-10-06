@@ -14,7 +14,6 @@ class TownsController < ApplicationController
 
 	def create
 		Town.__elasticsearch__.create_index! force: true
-		
 		documents = Nokogiri::XML(open("./storage/villes_france.xml"))
 		documents.xpath("//table").each do |doc|
 			lon, lat, dep, name, cpt = nil

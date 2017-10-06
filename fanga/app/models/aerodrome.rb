@@ -44,7 +44,21 @@ class Aerodrome < ActiveRecord::Base
 		                }
 		            }
 		        }
+		    },
+
+		    "sort": [
+		    {
+		      "_geo_distance": {
+		        "coordonate_point": { 
+		          "lat":  lat,
+		          "lon": lon
+		        },
+		        "order":         "asc",
+		        "unit":          "km", 
+		        "distance_type": "plane" 
+		      }
 		    }
+		  ]
 		}
 
 
