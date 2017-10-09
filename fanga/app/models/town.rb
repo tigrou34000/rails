@@ -16,13 +16,13 @@ class Town < ActiveRecord::Base
 		        "analyzer" => {
 		          "autocomplete_analyzer" => {
 		            "type" => "custom",
-		            "tokenizer" => "lowercase",
-		            "filter"    => ["asciifolding", "title_ngram"]
+		            "tokenizer" => "standard",
+		            "filter"    => ["lowercase", "asciifolding", "title_ngram"]
 		          }
 		        },
 		        "filter" => {
 		          "title_ngram" => {
-		            "type" => "nGram",
+		            "type" => "edge_ngram",
 		            "min_gram" => 2,
 		            "max_gram" => 5
 		          }

@@ -34,7 +34,7 @@
         }),
         methods: {
             authentication() {
-                axios.post("http://localhost:3000/authenticate", {
+                axios.post(process.env.RAILS_SERV_BASE+"/authenticate", {
                     'email': this.email,
                     'password': this.password
                 }).then(function(response) {

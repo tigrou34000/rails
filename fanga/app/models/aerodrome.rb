@@ -29,6 +29,8 @@ class Aerodrome < ActiveRecord::Base
 		index: Aerodrome.index_name,
 		body: 
 		{ 
+			from: 0,
+			size: 15,
 			query: {
 		        bool: {
 		            must: {
@@ -48,14 +50,14 @@ class Aerodrome < ActiveRecord::Base
 
 		    "sort": [
 		    {
-		      "_geo_distance": {
-		        "coordonate_point": { 
-		          "lat":  lat,
-		          "lon": lon
+		      _geo_distance: {
+		        coordonate_point: { 
+		          lat:  lat,
+		          lon: lon
 		        },
-		        "order":         "asc",
-		        "unit":          "km", 
-		        "distance_type": "plane" 
+		        order:         "asc",
+		        unit:          "km", 
+		        distance_type: "plane" 
 		      }
 		    }
 		  ]

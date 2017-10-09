@@ -58,7 +58,7 @@
                             aFinal[key] = this.eventObj[key];
                         }
                     }
-                    axios.put("http://localhost:3000/users/"+user.id, aFinal, {
+                    axios.put(process.env.RAILS_SERV_BASE+"/users/"+user.id, aFinal, {
                         headers: { Authorization: user.token}
                     }).then(function(response) {
                         store.dispatch('updateUser', aFinal);
@@ -83,7 +83,7 @@
                 let self = this
                 var user = this.getUser
 
-                axios.get("http://localhost:3000/users/"+user.id, {
+                axios.get(process.env.RAILS_SERV_BASE+"/users/"+user.id, {
                     headers: { Authorization: user.token}
                 }).then(function(response) {
                     var aContent = {}

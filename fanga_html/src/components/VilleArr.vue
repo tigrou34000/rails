@@ -1,19 +1,24 @@
 <template>
     <div>
-        <input id="villearr-id" type="text" v-model="villeArrId" />
-        <input id="villearr-name" type="text" v-model="villeArrName" />
-        lat :<input id="villearr-lat" type="text" v-model="villeArrLat">
-        lon :<input id="villearr-lon" type="text" v-model="villeArrLon">
         <autocomplete
-                url="http://localhost:3000/towns"
-                anchor="title"
-                label="writer"
-                :on-select="getData"  id="villearr"  :min="3"   :onShouldRenderChild="renderChild"  placeholder="ville d'arrivée">
+            :url= "getTownUrl"
+            anchor="title"
+            label="writer"
+            :on-select="getData" id="villearr"  :min="3"   :onShouldRenderChild="renderChild"  placeholder="ville d'arrivée">
         </autocomplete>
+
+        <select v-model="distanceSearchSel" @change="onChangeKm()">
+            <option v-for="distance in distanceSearchList"
+                    v-bind:value="distance"
+                    v-bind:selected="distanceSearch == distance">
+                {{distance}} Km
+            </option>
+        </select>
+
         <select v-model="aerodromeArr">
             <option
                     v-for="item in listAerodromes"
-                    v-bind:value="item.name_loc"
+                    v-bind:value="item"
                     v-bind:selected="aerodromeArr == item"
             >
                 {{ item.name_loc }} ( {{Math.round(item.distance * 100) / 100 }} km )
@@ -26,22 +31,29 @@
     import axios from 'axios';
     import Autocomplete from 'vue2-autocomplete-js';
     export default {
+        props: ['distanceSearch', 'distanceSearchList'],
         data: () => ({
-            villeArrId :0,
-            villeArrName :'',
-            villeArrLat : 0,
-            villeArrLon : 0,
+            villeArr: null,
             listAerodromes: [],
-            aerodromeArr: 0
+            aerodromeArr: null,
+            distanceSearchSel: 20,
+            getTownUrl: process.env.RAILS_SERV_BASE + "/towns"
         }),
         components: { Autocomplete },
+        watch: {
+            aerodromeArr: function (val) {
+                this.$emit("saveArr", [val.coordonate_point[0],val.coordonate_point[1], val.name_loc], 2);
+            }
+        } ,
         methods: {
+            onChangeKm(){
+                if(this.listAerodromes.length >0){
+                    this.getAerodrome(this.villeArr.location.lon, this.villeArr.location.lat, this.distanceSearchSel )
+                }
+            },
             getData(obj){
-                this.villeArrId = obj.id
-                this.villeArrlat =   obj.location.lat
-                this.villeArrLon =  obj.location.lon
-                this.villeArrName =  obj.name
-                this.getAerodrome(obj.location.lon, obj.location.lat, 50 )
+                this.villeArr = obj;
+                this.getAerodrome(obj.location.lon, obj.location.lat, this.distanceSearchSel )
             },
             renderChild(data) {
                 return `
@@ -51,8 +63,7 @@
             getAerodrome(lon, lat, ray) {
                 var _this = this;
 
-                axios.get("http://localhost:3000/aerodromes?lon="+lon+"&lat="+lat+"&ray="+ray, {}).then(function(response) {
-                    console.log(response.data);
+                axios.get(process.env.RAILS_SERV_BASE+"/aerodromes?lon="+lon+"&lat="+lat+"&ray="+ray, {}).then(function(response) {
                     _this.listAerodromes = response.data;
                 });
             }
@@ -61,5 +72,4 @@
     };
 
 </script>
-
 <link rel="stylesheet" href="vue2-autocomplete-js/dist/style/vue2-autocomplete.css">
