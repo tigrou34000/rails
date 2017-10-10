@@ -47,7 +47,7 @@
                 getUser : "getUser"
             })
         },
-            methods: {
+        methods: {
             saveUser() {
                  let self = this
                 if(this.isLogin) {

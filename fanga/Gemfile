@@ -25,6 +25,8 @@ gem 'elasticsearch-model', git: 'git://github.com/elasticsearch/elasticsearch-ra
 
 gem 'nokogiri'
 
+gem 'swagger-blocks'
+
 
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -50,6 +52,7 @@ group :development do
 end
 
 group :test do
+	gem 'simplecov'
 	gem 'factory_girl_rails', '~> 4.0'
 	gem 'shoulda-matchers', '~> 3.1'
 	gem 'faker'

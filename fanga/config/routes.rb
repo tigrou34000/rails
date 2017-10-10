@@ -8,5 +8,7 @@ Rails.application.routes.draw do
 
 		resources :aerodromes, only: [:index, :create]
 
+		resources :apidocs, only: [:index]
+
 	end
 end

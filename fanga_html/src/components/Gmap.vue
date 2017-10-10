@@ -28,7 +28,6 @@ export default {
     props: ["departure", "arrival"],
     data () {
         return {
-
             center: {lat: 48.86 , lng: 2.34445},
             markers: []
         }
