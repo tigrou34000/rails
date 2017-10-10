@@ -121,10 +121,10 @@ class UsersController < ApplicationController
 		user = User.new(email: params[:email],name:  params[:name], surname: params[:surname], nickname: params[:nickname], password_digest: params[:password], activate_account: false, dob: params[:dob])
 		if user.valid?
 			user.save
-			render json: {message: "ok"}, status: :ok
+			render json: {message: "ok"}, status: :created
 		else
 			render json: {error: user.errors}, status: :bad_request
-		end
+		end	
 	end
 
  	swagger_path '/users/{id}' do

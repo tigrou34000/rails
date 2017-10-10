@@ -18,3 +18,13 @@ development:
   pool: 5
   username: postgres  
   password: mysecretpassword
+
+test:
+  <<: *default
+  database: fanga_test
+  adapter: postgresql
+  encoding: unicode
+  host: db
+  pool: 5
+  username: postgres  
+  password: mysecretpassword
