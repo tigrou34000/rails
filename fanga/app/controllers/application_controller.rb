@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::API
+      include Swagger::Blocks
 	before_action :authenticate_request
  	before_action :set_locale
  
@@ -15,4 +16,13 @@ class ApplicationController < ActionController::API
    def set_locale
     I18n.locale = params[:locale] || I18n.default_locale
   end
+
+
+  
+
+
+
+
+
 end
+

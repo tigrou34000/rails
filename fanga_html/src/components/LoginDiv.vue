@@ -3,46 +3,53 @@
         <label>Email : </label><input id="email" type="text" v-model="email">
         <label>password : </label><input id="password" type="text" v-model="password" >
         <button v-on:click="authentication()">Login</button>
+        <router-link :to="{name:'user.create'}" class="nav-link">create account</router-link>
+        <router-link to="/user/create-user">created account</router-link>
     </div>
     <div v-else>
         Logué
+        <button v-on:click="disconnect()">Disconnect</button>
+        <router-link to="/user/edit-user">edit account</router-link>
     </div>
 
 </template>
+
 <script>
     import axios from 'axios';
+    import { mapGetters, mapActions } from 'vuex'
+    import store from '../store/index'
     export default {
     name:'login',
       data () {
         return {
-                    token: '',
-                    email: '',
-                    password: '',
-                    name: '',
-                    surname: '',
-                    isLogin: false
+                    email: 'tiger63.thomas@gmail.com',
+                    password: '111111',
             }
         },
+        computed: mapGetters({
+                setErrors: 'setErrors',
+                setUser: 'setUser',
+                logout:'logout',
+                isLogin : "isLogin"
+        }),
         methods: {
-            setCookie(name, value, exdays) {
-                var d = new Date();
-                d.setTime(d.getTime() +  (exdays*24*60*60*1000) ) ;
-                var expires = "expires="+ d.toUTCString();
-                document.cookie = '"'+name+'='+value+';'+expires;
-            },
             authentication() {
-                axios.post("http://localhost:3000/authenticate", {
+                axios.post(process.env.RAILS_SERV_BASE+"/authenticate", {
                     'email': this.email,
                     'password': this.password
                 }).then(function(response) {
-                    Login.token = response.data.auth_token;
-                    isLogin = true;
-                    this.setCookie("auth_token", token , 1);
-                    
+                    store.dispatch('setUser', {'email': email.value, 'token': response.data.auth_token, 'user_id': response.data.user_id});
                 }).catch(function (error) {
-                    console.log(error);
+                    for(var err in error.response.data.error) {
+                         var a = {}
+                         a[err] = error.response.data.error[err][0]
+                        store.dispatch('setErrors', a);
+                    }
                 });
                 ;
+            },
+            disconnect() {
+                store.dispatch('logout');
             }
         }
     }

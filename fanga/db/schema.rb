@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2017_07_13_130552) do
+ActiveRecord::Schema.define(version: 20171003134710) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,11 +48,39 @@ ActiveRecord::Schema.define(version: 2017_07_13_130552) do
     t.index ["category_id", "lang_id"], name: "index_category_translations_on_category_id", unique: true
   end
 
+  create_table "countries", force: :cascade do |t|
+    t.string "name"
+  end
+
   create_table "langs", force: :cascade do |t|
     t.text "iso", null: false
     t.text "language"
     t.index ["iso"], name: "index_lang_on_iso", unique: true
   end
+
+  create_table "aerodromes", force: :cascade do |t|
+    t.float "lon"
+    t.float "lat"
+    t.string "code_loc"
+    t.string "name_loc"
+    t.bigint "type_loc"
+    t.bigint "countries_id"
+    t.index ["countries_id"], name: "index_type_aerodromes_on_countries_id"
+
+  end
+
+  create_table "towns", force: :cascade do |t|
+    t.float "lon"
+    t.float "lat"
+    t.string "code_loc"
+    t.string "name"
+    t.string "cpt"
+    t.string "dep"
+    t.bigint "countries_id"
+    t.index ["countries_id"], name: "index_type_towns_on_countries_id"
+  end
+
+
 
   create_table "users", force: :cascade do |t|
     t.string "email"

@@ -17,8 +17,17 @@ gem 'puma', '~> 3.7'
  gem 'bcrypt', '~> 3.1.11'
 
 gem 'simple_command'
- gem 'jwt'
- gem 'i18n'
+gem 'jwt'
+gem 'i18n'
+
+gem 'elasticsearch-rails', git: 'git://github.com/elasticsearch/elasticsearch-rails.git'
+gem 'elasticsearch-model', git: 'git://github.com/elasticsearch/elasticsearch-rails.git'
+
+gem 'nokogiri'
+
+gem 'swagger-blocks'
+
+
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.5'
@@ -43,6 +52,8 @@ group :development do
 end
 
 group :test do
+	gem 'webmock'
+	gem 'simplecov'
 	gem 'factory_girl_rails', '~> 4.0'
 	gem 'shoulda-matchers', '~> 3.1'
 	gem 'faker'

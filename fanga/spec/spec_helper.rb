@@ -11,7 +11,21 @@
 # a separate helper file that requires the additional dependencies and performs
 # the additional setup, and require it from the spec files that actually need
 # it.
-#
+require File.expand_path("../../config/environment", __FILE__)
+
+
+
+require 'rspec/rails'
+
+Rails.logger.level = 4
+
+require 'webmock/rspec'
+ WebMock.disable_net_connect!(allow_localhost: true)
+Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
+Dir[Rails.root.join("spec/spec_helpers/**/*.rb")].each {|f| require f}
+
+require 'factory_girl_rails'
+
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
@@ -44,6 +58,15 @@ RSpec.configure do |config|
   # triggering implicit auto-inclusion in groups with matching metadata.
   config.shared_context_metadata_behavior = :apply_to_host_groups
 
+  config.infer_spec_type_from_file_location!
+  config.include Rails.application.routes.url_helpers # needed for requests
+
+
+  
+  config.after(:each) do
+    DeferredGarbageCollection.reconsider
+  end
+
 # The settings below are suggested to provide a good initial experience
 # with RSpec, but feel free to customize to your heart's content.
 =begin
@@ -65,10 +88,6 @@ RSpec.configure do |config|
   #   - http://www.teaisaweso.me/blog/2013/05/27/rspecs-new-message-expectation-syntax/
   #   - http://rspec.info/blog/2014/05/notable-changes-in-rspec-3/#zero-monkey-patching-mode
   config.disable_monkey_patching!
-
-  # This setting enables warnings. It's recommended, but in some cases may
-  # be too noisy due to issues in dependencies.
-  config.warnings = true
 
   # Many RSpec users commonly either run the entire suite or an individual
   # file, and it's useful to allow more verbose output when running an

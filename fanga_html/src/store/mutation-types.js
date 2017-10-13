@@ -1,0 +1,5 @@
+export const ADD_TO_ERROR = "ADD_TO_ERROR"
+export const RECEIVE_ERRORS = "RECEIVE_ERRORS"
+
+export const RECEIVE_USER = "RECEIVE_USER"
+export const UPDATE_USER = "UPDATE_USER"
