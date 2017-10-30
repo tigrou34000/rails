@@ -18,7 +18,7 @@
 
 
     import villedep from '../components/VilleDep.vue'
-    import villearr from '../components/Villearr.vue'
+    import villearr from '../components/VilleArr.vue'
     import gmap from '../components/Gmap.vue'
 
     export default {

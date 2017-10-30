@@ -12,7 +12,10 @@
     <input type="text" id="nickname" placeholder="Type your nickname..."  v-model="eventObj.nickname">
     <label>Date of birthday</label>
     <input type="text" id="dob" placeholder="Type your date of birthday" v-model="eventObj.dob">
-
+      <div v-if="!isLogin">
+        <label>email</label>
+        <input type="text" id="email" placeholder="Type your email..."  v-model="eventObj.email">
+      </div>
     <label>password</label>
     <input type="password" id="password" placeholder="Type your password"  v-model="eventObj.password">
     <label>password confirmation</label>
@@ -35,7 +38,8 @@
                     nickname:'',
                     dob:'',
                     password:'',
-                    password_confirmation:''
+                    password_confirmation:'',
+                    email: ''
                 },
                 message: ''
 
@@ -71,6 +75,24 @@
                         }
                     });
                 }else{
+                  var aFinal = {};
+                  for (var key in this.eventObj) {
+                    if(this.eventObj[key] != "" &&  this.eventObj[key]!== null)  {
+                      aFinal[key] = this.eventObj[key];
+                    }
+                  }
+                  alert(aFinal);
+                  axios.post(process.env.RAILS_SERV_BASE+"/users/", aFinal, {
+                  }).then(function(response) {
+                    store.dispatch('updateUser', aFinal);
+                    self.message = 'insert done'
+                  }).catch(function (error) {
+                    for(var err in error.response.data.error) {
+                      var a = {}
+                      a[err] = error.response.data.error[err][0]
+                      store.dispatch('setErrors', a);
+                    }
+                  });
 
                 }
             }

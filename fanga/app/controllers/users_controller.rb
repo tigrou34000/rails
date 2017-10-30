@@ -118,7 +118,7 @@ class UsersController < ApplicationController
 	    end
 	  end
 	def create
-		user = User.new(email: params[:email],name:  params[:name], surname: params[:surname], nickname: params[:nickname], password_digest: params[:password], activate_account: false, dob: params[:dob])
+		user = User.new(email: params[:email],name:  params[:name], surname: params[:surname], nickname: params[:nickname], password: params[:password], activate_account: false, dob: params[:dob])
 		if user.valid?
 			user.save
 			render json: {message: "ok"}, status: :created
