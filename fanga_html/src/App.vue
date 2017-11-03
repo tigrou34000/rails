@@ -4,7 +4,7 @@
             <div class="container">
                 <a class="navbar-brand" href="#">
                     <i class="glyphicon glyphicon-time"></i>
-                    Vue Time Tracker
+                    LiftAir
                 </a>
                 <ul class="nav navbar-nav">
                     <li><router-link to="/home">Home</router-link></li>

@@ -42,7 +42,7 @@
         components: { Autocomplete },
         watch: {
             aerodromeDep: function (val) {
-                this.$emit("saveDep", [val.coordonate_point[0],val.coordonate_point[1], val.name_loc], 1);
+                this.$emit("saveDep", [val.coordonate_point[0],val.coordonate_point[1], val.name_loc, val.id], 1);
             }
         },
         methods: {

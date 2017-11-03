@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171031142731) do
+ActiveRecord::Schema.define(version: 20171103161145) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -87,6 +87,18 @@ ActiveRecord::Schema.define(version: 20171031142731) do
     t.index ["countries_id"], name: "index_type_towns_on_countries_id"
   end
 
+  create_table "trips", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "aerodrome_dep_id"
+    t.bigint "aerodrome_arr_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer "nb_passager"
+    t.index ["aerodrome_arr_id"], name: "index_trips_on_aerodrome_arr_id"
+    t.index ["aerodrome_dep_id"], name: "index_trips_on_aerodrome_dep_id"
+    t.index ["user_id"], name: "index_trips_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email"
     t.string "name"
@@ -106,4 +118,7 @@ ActiveRecord::Schema.define(version: 20171031142731) do
   add_foreign_key "article_translations", "langs"
   add_foreign_key "category_translations", "categories"
   add_foreign_key "category_translations", "langs"
+  add_foreign_key "trips", "aerodromes", column: "aerodrome_arr_id"
+  add_foreign_key "trips", "aerodromes", column: "aerodrome_dep_id"
+  add_foreign_key "trips", "users"
 end

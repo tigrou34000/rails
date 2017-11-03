@@ -1,9 +1,8 @@
 <template>
   <div class="jumbotron">
-    <h1>Vue Time Tracker</h1>
+    <h1>Liftair</h1>
     <p>
-      <strong>
-        Get started by
+      <strong>The first site where you can share your flight.
       </strong>
     </p>
   </div>

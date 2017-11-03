@@ -1,7 +1,8 @@
 require 'elasticsearch/model'
 
 class Aerodrome < ActiveRecord::Base
-
+  
+  
 	ELASTICSEARCH_MAX_RESULTS = 25
 
 	include Elasticsearch::Model

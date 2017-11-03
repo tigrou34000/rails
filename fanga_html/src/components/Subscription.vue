@@ -81,7 +81,6 @@
                       aFinal[key] = this.eventObj[key];
                     }
                   }
-                  alert(aFinal);
                   axios.post(process.env.RAILS_SERV_BASE+"/users/", aFinal, {
                   }).then(function(response) {
                     store.dispatch('updateUser', aFinal);
