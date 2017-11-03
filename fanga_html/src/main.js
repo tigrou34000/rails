@@ -20,6 +20,7 @@ Vue.use(VueRouter)
 const routes = [
     { path: '/home', component: Home },
     {  path: '/user', component:Login, name: 'user.index'},
+    {  path: '/user/validate_user/:userid/:token', component:Login, name: 'user.validate'},
     {  path: '/user/create-user', component:Subscription, name: 'user.create'},
     {  path: '/user/edit-user', component:Subscription, name: 'user.update'},
     {  path: '/myplan', component:MyPlan, name: 'myplan.search'},

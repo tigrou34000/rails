@@ -10,6 +10,11 @@ services:
       - 9200:9200
     environment:
       ES_JAVA_OPTS: '-Xms250m -Xmx250m'
+  smtp:
+    image: yrezgui/smtp-mail-server    
+    ports:
+      - 25:25
+      - 3333:3333
   #kibana:
     #image: kibana
     #ports:
@@ -23,5 +28,7 @@ services:
       - "3000:3000"
     depends_on:
       - db
+      - smtp
     #  - kibana
       - elasticsearch
+

@@ -4,6 +4,4 @@ RUN mkdir /api_server
 WORKDIR /api_server
 ADD Gemfile /api_server/Gemfile
 RUN bundle install
-ADD . /api_server
-
 

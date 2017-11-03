@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-	 skip_before_action :authenticate_request, :only => [:create]
+	 skip_before_action :authenticate_request, :only => [:create, :activateaccount]
 
 
 	 swagger_path '/users/{id}' do
@@ -35,7 +35,16 @@ class UsersController < ApplicationController
 			end
 	end
 
-
+  def activateaccount
+      if UserService.checkAccount(params[:token_account],params[:id] )
+         user = User.find(params[:id])
+         user.activate_account = true
+         user.save
+        render json: {message:"activate"}, status: :ok
+      else 
+        render json: {error: "utilisateur inconnu"}, status: :no_content
+      end
+  end
  	swagger_path '/users/{id}' do
 	    operation :put do
 	      key :summary, 'update user by ID'
@@ -68,10 +77,6 @@ class UsersController < ApplicationController
 		user = User.find(params[:id])
 		if !user.nil?
 			puts("user exist")
-
-			if params.has_key?(:activate_account)
-				user.activate_account =  params[:activate_account]
-			end
 			if params.has_key?(:name)
 				puts("name should be save")
 				user.name =  params[:name]
@@ -118,9 +123,13 @@ class UsersController < ApplicationController
 	    end
 	  end
 	def create
+	  
 		user = User.new(email: params[:email],name:  params[:name], surname: params[:surname], nickname: params[:nickname], password: params[:password], activate_account: false, dob: params[:dob])
 		if user.valid?
 			user.save
+			token = Token.new({user_id: user.id, token_string: Digest::SHA1.hexdigest([Time.now, rand].join), token_type: 1, created_date: Time.now})
+			token.save
+			UserMailer.send_token_creation(user, token).deliver_now
 			render json: {message: "ok"}, status: :created
 		else
 			render json: {error: user.errors}, status: :bad_request

@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 		post 'authenticate', to: 'authentication#authenticate'
 
 		resources :users
+		
+		put 'users/:id/activateaccount/:token_account', to: "users#activateaccount"
 
 		resources :towns, only: [:index, :show, :create]
 
